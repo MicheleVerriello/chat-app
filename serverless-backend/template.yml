@@ -11,10 +11,10 @@ Resources:
     Properties:
       Handler: com.chatapp.StreamLambdaHandler::handleRequest
       Runtime: java17
-      CodeUri: .
+      CodeUri: target/serverless-backend-1.0-SNAPSHOT-lambda-package.zip
       MemorySize: 512
       Policies: AWSLambdaBasicExecutionRole
-      Timeout: 30
+      Timeout: 60
       Events:
         ProxyResource:
           Type: Api
@@ -24,7 +24,7 @@ Resources:
 
 Outputs:
   ServerlessBackendApi:
-    Description: URL for application
-    Value: !Sub 'https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/ping'
+    Description: API Gateway Chat App Endpoint
+    Value: !Sub 'https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/'
     Export:
       Name: ServerlessBackendApi

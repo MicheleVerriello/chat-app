@@ -1,4 +1,5 @@
 /Users/micheleverriello/chat-app-aws-lambda-mongodb/serverless-backend/src/main/java/com/chatapp/Application.java
+/Users/micheleverriello/chat-app-aws-lambda-mongodb/serverless-backend/src/main/java/com/chatapp/controller/GenericController.java
 /Users/micheleverriello/chat-app-aws-lambda-mongodb/serverless-backend/src/main/java/com/chatapp/repository/UserRepository.java
 /Users/micheleverriello/chat-app-aws-lambda-mongodb/serverless-backend/src/main/java/com/chatapp/controller/UserController.java
 /Users/micheleverriello/chat-app-aws-lambda-mongodb/serverless-backend/src/main/java/com/chatapp/exception/UserNotFoundException.java

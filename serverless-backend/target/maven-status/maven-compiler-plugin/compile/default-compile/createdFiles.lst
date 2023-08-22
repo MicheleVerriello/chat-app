@@ -1,3 +1,4 @@
+com/chatapp/controller/GenericController.class
 com/chatapp/repository/UserRepository.class
 com/chatapp/Application.class
 com/chatapp/service/UserService.class
