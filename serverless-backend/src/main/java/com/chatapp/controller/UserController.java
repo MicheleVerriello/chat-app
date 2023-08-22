@@ -1,15 +1,15 @@
 package com.chatapp.controller;
 
-import com.chatapp.backend.exceptions.UserNotFoundException;
-import com.chatapp.backend.pojos.User;
-import com.chatapp.backend.services.UserService;
+import com.chatapp.exception.UserNotFoundException;
+import com.chatapp.pojo.User;
+import com.chatapp.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("${api.version-path}/users")
+@RequestMapping("/api/users")
 public class UserController {
 
     private final UserService userService;
@@ -41,5 +41,10 @@ public class UserController {
     @PutMapping
     User updateUser(@RequestBody User user) {
         return userService.updateUser(user);
+    }
+
+    @DeleteMapping("/{id}")
+    void deleteUser(@PathVariable("id") String id) {
+        userService.deleteUserById(id);
     }
 }

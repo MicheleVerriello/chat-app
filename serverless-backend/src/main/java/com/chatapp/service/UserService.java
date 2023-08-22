@@ -1,7 +1,7 @@
 package com.chatapp.service;
 
-import com.chatapp.backend.pojos.User;
-import com.chatapp.backend.repositories.UserRepository;
+import com.chatapp.pojo.User;
+import com.chatapp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
