@@ -1,7 +1,7 @@
 {
   "body": "",
   "resource": "/{proxy+}",
-  "path": "/api/users",
+  "path": "/api/users/64df674a3eda41c8e249c70f",
   "httpMethod": "GET",
   "headers": {
     "Accept": "application/json",

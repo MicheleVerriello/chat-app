@@ -3,6 +3,8 @@ package com.chatapp.controller;
 import com.chatapp.exception.UserNotFoundException;
 import com.chatapp.pojo.User;
 import com.chatapp.service.UserService;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,12 +21,13 @@ public class UserController {
     }
 
     @GetMapping
-    List<User> getUsers() {
+    public List<User> getUsers() {
         return userService.getAllUsers();
     }
 
     @GetMapping("/{id}")
-    User getUserById(@PathVariable("id") String id) {
+    @Cacheable(key = "#id", value = "User") //add user to cache if this method is called more than once
+    public User getUserById(@PathVariable("id") String id) {
         Optional<User> user = userService.getUserById(id);
         if (user.isPresent()) {
             return user.get();
@@ -34,17 +37,18 @@ public class UserController {
     }
 
     @PostMapping
-    User addUser(@RequestBody User user) {
+    public User addUser(@RequestBody User user) {
         return userService.createUser(user);
     }
 
     @PutMapping
-    User updateUser(@RequestBody User user) {
+    public User updateUser(@RequestBody User user) {
         return userService.updateUser(user);
     }
 
     @DeleteMapping("/{id}")
-    void deleteUser(@PathVariable("id") String id) {
+    @CacheEvict(value = "users", key="#id") //remove user from cache
+    public void deleteUser(@PathVariable("id") String id) {
         userService.deleteUserById(id);
     }
 }

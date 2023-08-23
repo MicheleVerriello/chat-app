@@ -27,6 +27,7 @@ public class UserService {
     }
 
     public Optional<User> getUserById(String id) {
+        System.out.println("Getting user from db");
         return userRepository.findById(id);
     }
 
