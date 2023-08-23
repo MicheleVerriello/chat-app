@@ -23,6 +23,6 @@
 hs_err_pid*
 replay_pid*
 
-/serverless-backend/.idea/
-/serverless-backend/.aws-sam/
-/serverless-backend/target/
+.idea/*.*
+.aws-sam/*.*
+target/*.*
