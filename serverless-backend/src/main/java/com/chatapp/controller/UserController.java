@@ -4,6 +4,7 @@ import com.chatapp.exception.UserNotFoundException;
 import com.chatapp.pojo.User;
 import com.chatapp.service.UserService;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,17 +38,19 @@ public class UserController {
     }
 
     @PostMapping
+    @CacheEvict(value = "User", allEntries = true)
     public User addUser(@RequestBody User user) {
         return userService.createUser(user);
     }
 
-    @PutMapping
-    public User updateUser(@RequestBody User user) {
+    @PutMapping("/{id}")
+    @CachePut(key = "#id", value = "User")
+    public User updateUser(@PathVariable("id") String id, @RequestBody User user) {
         return userService.updateUser(user);
     }
 
     @DeleteMapping("/{id}")
-    @CacheEvict(value = "users", key="#id") //remove user from cache
+    @CacheEvict(key = "#id", value = "User") //remove user from cache
     public void deleteUser(@PathVariable("id") String id) {
         userService.deleteUserById(id);
     }
