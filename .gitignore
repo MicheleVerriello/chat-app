@@ -27,3 +27,4 @@ replay_pid*
 /serverless-backend/.aws-sam/*
 /serverless-backend/target/*
 /chat-service/.idea/*
+/log-service/.idea/*
