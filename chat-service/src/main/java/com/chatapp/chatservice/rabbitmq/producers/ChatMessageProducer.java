@@ -11,7 +11,7 @@ public class ChatMessageProducer {
         this.rabbitTemplate = rabbitTemplate;
     }
 
-    public void sendMessage(String exchange, String routingKey, String message) {
-        rabbitTemplate.convertAndSend(exchange, routingKey, message);
+    public void sendMessage(String queue, String message) {
+        rabbitTemplate.convertAndSend(queue, message);
     }
 }
