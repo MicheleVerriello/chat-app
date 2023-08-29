@@ -2,6 +2,7 @@ package com.chatapp.chatservice.controllers;
 
 import com.chatapp.chatservice.data.models.Chat;
 import com.chatapp.chatservice.data.models.ChatMessage;
+import com.chatapp.chatservice.models.responses.Response;
 import com.chatapp.chatservice.rabbitmq.producers.ChatMessageProducer;
 import com.chatapp.chatservice.services.ChatMessageService;
 import com.chatapp.chatservice.services.ChatService;
@@ -33,8 +34,15 @@ public class ChatController {
     }
 
     @PostMapping
-    public String sendMessage(@RequestBody ChatMessage chatMessage) {
+    public Response sendMessage(@RequestBody ChatMessage chatMessage) {
 
+        Response response = new Response(new Date(System.currentTimeMillis()));
+
+        /*
+            if the chatId is not passed into request,
+            the service will find for a chat with the same components,
+            if there isn't, the system will create a new chat
+        */
         if(chatMessage.getFkIdChat() == null) {
             List<String> componentIds = Arrays.asList(chatMessage.getFkIdUserSender(), chatMessage.getFkIdUserReceiver());
             Optional<Chat> chat = this.chatService.findChatByComponentIds(componentIds);
@@ -46,10 +54,11 @@ public class ChatController {
                 chatMessage.setFkIdChat(newChat.getId());
             }
         }
-        
-        chatMessageService.createChatMessage(chatMessage);
 
-        chatMessageProducer.sendMessage("chat", chatMessage.getMessage());
-        return "Message sent to queue: " + chatMessage.getMessage();
+        response.setResult(chatMessageService.createChatMessage(chatMessage).getId());
+        chatMessage.setSendDate(new Date(System.currentTimeMillis()));
+        chatMessageProducer.sendMessage("chat-logs", chatMessage.getMessage());
+        response.setApiCallEndedAt(new Date(System.currentTimeMillis()));
+        return response;
     }
 }

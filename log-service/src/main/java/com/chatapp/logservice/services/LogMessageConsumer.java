@@ -11,7 +11,7 @@ public class LogMessageConsumer {
 
     private static final Logger logger = LoggerFactory.getLogger(LogMessageConsumer.class);
 
-    @RabbitListener(queues = "chat")
+    @RabbitListener(queues = "chat-logs")
     public void writeToLogs(String message) {
         logger.info(message);
     }

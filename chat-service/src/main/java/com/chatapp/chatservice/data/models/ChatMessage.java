@@ -7,6 +7,7 @@ import java.util.Date;
 
 @Document(collection = "chatmessages")
 public class ChatMessage {
+
     @Id
     private String id;
     private String fkIdUserSender;
@@ -21,6 +22,14 @@ public class ChatMessage {
         this.fkIdChat = fkIdChat;
         this.message = message;
         this.sendDate = new Date(System.currentTimeMillis());
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getFkIdUserSender() {
