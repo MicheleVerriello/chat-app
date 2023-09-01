@@ -8,3 +8,6 @@ This is a simple POC backend of a chat application built with AWS Lambda, MongoD
 4. Download MongoDB
 5. Move into the `serverless-backend` folder.
 6. Type `mvn clean package` -> `sam build` -> `sam local invoke ServerlessBackendFunction -e event.json`.
+
+## System Design Representation
+![System Design Image](/images/SystemDesign.png)
