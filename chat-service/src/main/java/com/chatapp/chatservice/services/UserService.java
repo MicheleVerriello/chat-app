@@ -26,6 +26,6 @@ public class UserService {
     }
 
     public List<User> getUsersByUsername(String username) {
-        return userRepository.findByUsername(username);
+        return userRepository.findByUsernameIsLikeIgnoreCase(username);
     }
 }
