@@ -1,21 +1,16 @@
 package com.chatapp.chatservice.data.models;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 public class ChatMessage {
 
-    @Id
     private String id;
     private String fkIdUserSender;
     private String fkIdUserReceiver;
@@ -29,53 +24,5 @@ public class ChatMessage {
         this.fkIdChat = fkIdChat;
         this.message = message;
         this.sendDate = new Date(System.currentTimeMillis());
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getFkIdUserSender() {
-        return fkIdUserSender;
-    }
-
-    public void setFkIdUserSender(String fkIdUserSender) {
-        this.fkIdUserSender = fkIdUserSender;
-    }
-
-    public String getFkIdUserReceiver() {
-        return fkIdUserReceiver;
-    }
-
-    public void setFkIdUserReceiver(String fkIdUserReceiver) {
-        this.fkIdUserReceiver = fkIdUserReceiver;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public Date getSendDate() {
-        return sendDate;
-    }
-
-    public void setSendDate(Date sendDate) {
-        this.sendDate = sendDate;
-    }
-
-    public String getFkIdChat() {
-        return fkIdChat;
-    }
-
-    public void setFkIdChat(String fkIdChat) {
-        this.fkIdChat = fkIdChat;
     }
 }
