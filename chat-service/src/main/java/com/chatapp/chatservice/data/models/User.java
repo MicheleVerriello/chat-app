@@ -1,8 +1,21 @@
 package com.chatapp.chatservice.data.models;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Document("users")
-public record User (@Id String id, String username, String name, String surname) {
+public class User {
+    @Id
+    private String id;
+    private String username;
+    private String name;
+    private String surname;
 }
