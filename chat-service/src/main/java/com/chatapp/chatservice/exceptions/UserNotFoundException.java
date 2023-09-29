@@ -1,11 +1,11 @@
 package com.chatapp.chatservice.exceptions;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ResponseStatus;
-
-@ResponseStatus(HttpStatus.NOT_FOUND)
 public class UserNotFoundException extends RuntimeException {
-    public UserNotFoundException(String message) {
-        super(message);
+    public UserNotFoundException(String id) {
+        super("User with id: " + id + " Not Found");
+    }
+
+    public UserNotFoundException() {
+        super("User Not Found");
     }
 }
