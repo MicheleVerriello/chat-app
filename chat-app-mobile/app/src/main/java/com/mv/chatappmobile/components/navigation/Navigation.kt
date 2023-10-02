@@ -3,11 +3,13 @@ package com.mv.chatappmobile.components.navigation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.mv.chatappmobile.components.ui.chat.ChatListScreen
-import com.mv.chatappmobile.components.ui.chat.ChatScreen
+import androidx.navigation.navArgument
+import com.mv.chatappmobile.components.ui.chat.list.ChatListScreen
+import com.mv.chatappmobile.components.ui.chat.detail.ChatScreen
 import com.mv.chatappmobile.components.ui.login.LoginScreen
 import com.mv.chatappmobile.components.ui.signup.SignUpScreen
 import com.mv.chatappmobile.components.ui.scaffold.ScaffoldScreen
@@ -34,11 +36,21 @@ fun Navigation(
         composable(route = Screen.ProfileScreen.route) {
             ProfileScreen(navController = navController)
         }
-        composable(route = Screen.ChatScreen.route) {
-            ChatScreen()
+        composable(
+            route = Screen.ChatScreen.route + "/{receiverUsername}",
+            arguments = listOf(
+                navArgument("receiverUsername") {
+                    type = NavType.StringType
+                    nullable = false
+                    defaultValue = ""
+                } 
+            )
+        ) {
+            ChatScreen(receiverUsername = it.arguments?.getString("receiverUsername"))
         }
+
         composable(route = Screen.ChatListScreen.route) {
-            ChatListScreen()
+            ChatListScreen(navController = navController)
         }
     }
 }

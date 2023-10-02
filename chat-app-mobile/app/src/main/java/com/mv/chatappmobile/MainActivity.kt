@@ -27,13 +27,10 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     if (userId != null) {
-                        Log.d("ID USER", userId)
                         Navigation(Screen.ScaffoldScreen.route)
                     } else {
-                        Log.d("ID USER", "null")
                         Navigation(Screen.LoginScreen.route)
                     }
-
                 }
             }
         }

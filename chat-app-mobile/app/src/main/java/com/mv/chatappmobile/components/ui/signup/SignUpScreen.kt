@@ -29,8 +29,6 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.mv.chatappmobile.components.navigation.Screen
-import com.mv.chatappmobile.components.ui.login.LoginViewModel
-import com.mv.chatappmobile.network.request.LoginRequestBody
 import com.mv.chatappmobile.network.request.SignUpRequestBody
 import com.mv.chatappmobile.utilities.sharedpreferences.SharedPreferencesManager
 import kotlinx.coroutines.CoroutineScope
@@ -95,12 +93,11 @@ fun SignUpScreen(navController: NavController) {
                     coroutineScope.launch(Dispatchers.IO) {
                         val response = viewModel.signUp(signUpRequestBody = SignUpRequestBody(name, surname, username, password))
                         if (response.isSuccessful) {
-                            Log.d("LOGIN RESPONSE OK", response.body().toString())
                             CoroutineScope(Dispatchers.Main).launch {
-                                SharedPreferencesManager.put(context = context, "id", response.body()!!.id)
+                                SharedPreferencesManager.put(context = context, "id", response.body()!!.id) // Cache userId
+                                SharedPreferencesManager.put(context = context, "username", username)
                                 navController.navigate(Screen.ScaffoldScreen.route)
                             }
-
                         } else {
                             Log.d("LOGIN RESPONSE ERROR","${response.code()} - ${response.message()}")
                         }

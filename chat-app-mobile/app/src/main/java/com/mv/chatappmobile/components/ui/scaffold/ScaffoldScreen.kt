@@ -59,7 +59,7 @@ fun ScaffoldScreen(
         )
     )
 
-    var bottomNavState by rememberSaveable { mutableIntStateOf(0) }
+    var bottomNavState by rememberSaveable { mutableIntStateOf(1) }
     var navController = rememberNavController()
 
     Scaffold(

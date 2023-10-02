@@ -8,11 +8,7 @@ import okhttp3.Response
 import okhttp3.WebSocket
 import okhttp3.WebSocketListener
 
-class ChatWebSocketListener(private val messageCallback: (ChatMessage) -> Unit) : WebSocketListener() {
-
-    private val moshi = Moshi.Builder()
-        .addLast(KotlinJsonAdapterFactory())
-        .build()
+class ChatWebSocketListener : WebSocketListener() {
 
     override fun onOpen(webSocket: WebSocket, response: Response) {
         // Handle WebSocket connection opened
@@ -21,8 +17,7 @@ class ChatWebSocketListener(private val messageCallback: (ChatMessage) -> Unit) 
 
     override fun onMessage(webSocket: WebSocket, text: String) {
         try {
-            val chatMessage = moshi.adapter(ChatMessage::class.java).fromJson(text)
-            chatMessage?.let { messageCallback.invoke(it) }
+            Log.d("socket onMessage", text)
         } catch (e: Exception) {
             // Handle JSON parsing error
             Log.e("socket onMessage", e.message.toString())

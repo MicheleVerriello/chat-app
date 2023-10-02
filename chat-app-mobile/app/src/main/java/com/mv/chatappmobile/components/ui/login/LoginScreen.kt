@@ -80,6 +80,7 @@ fun LoginScreen(navController: NavController) {
                             Log.d("LOGIN RESPONSE OK", response.body().toString())
                             CoroutineScope(Dispatchers.Main).launch {
                                 SharedPreferencesManager.put(context = context, "id", response.body()!!.id)
+                                SharedPreferencesManager.put(context = context, "username", username)
                                 navController.navigate(Screen.ScaffoldScreen.route)
                             }
 
