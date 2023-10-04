@@ -10,20 +10,32 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class ChatViewModel(private val chatRepository: ChatRepository): ViewModel() {
+class ChatViewModel(): ViewModel() {
+
 
     private val _chatMessages: MutableStateFlow<List<ChatMessageEntity>> = MutableStateFlow(emptyList())
     val chatMessages: StateFlow<List<ChatMessageEntity>> get() = _chatMessages
 
     fun getMessagesByChatId(chatId: Long) {
         viewModelScope.launch(Dispatchers.IO) {
-            _chatMessages.value = chatRepository.getMessagesByChatId(chatId)
+//            _chatMessages.value = chatRepository.getMessagesByChatId(chatId)
         }
     }
 
     fun insertChatMessage(chatMessage: ChatMessageEntity) {
         viewModelScope.launch(Dispatchers.IO) {
-            chatRepository.insertChatMessage(chatMessage)
+//            chatRepository.insertChatMessage(chatMessage)
         }
+    }
+
+    init {
+        // Create and connect WebSocketClient here
+
+    }
+
+
+    override fun onCleared() {
+        // disconnect the ws
+        super.onCleared()
     }
 }

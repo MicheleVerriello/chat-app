@@ -1,5 +1,6 @@
 package com.mv.chatappmobile.network.websocket
 
+import android.util.Log
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.mv.chatappmobile.data.MinifiedChatMessage
 import okhttp3.OkHttpClient
@@ -26,7 +27,13 @@ class ChatWebSocketClient(
     }
 
     private fun sendMessage(message: String) {
-        webSocket?.send(message)
+        Log.d("sendMessage", message)
+        try {
+            webSocket?.send(message)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
     }
 
     fun disconnectWebSocket() {
@@ -34,6 +41,7 @@ class ChatWebSocketClient(
     }
 
     fun sendChatMessage(chatMessage: MinifiedChatMessage) {
+        Log.d("sendChatMessage", chatMessage.toString())
         val objectMapper = ObjectMapper()
         sendMessage(objectMapper.writeValueAsString(chatMessage))
     }
